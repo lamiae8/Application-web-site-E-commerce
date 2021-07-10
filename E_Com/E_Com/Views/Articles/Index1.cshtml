@@ -1,0 +1,61 @@
+﻿@model IEnumerable<E_Com.Models.Article>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Articles</h1>
+
+
+<body>
+
+    <div style="text-align:right;" class="row">
+        <div class="col-lg-8 col-md-4"></div>
+        <div class="col-lg-4 col-md-4">
+            <form asp-action="searchArticleResult" class="row">
+                <div class="col-lg-8 col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input name="searchArticle" placeholder="Search" class="form-control" />
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <button type="submit" class="btn btn-outline-info">Search </button>
+                </div>
+
+
+
+
+            </form>
+        </div>
+
+
+
+    </div>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6" style="margin-bottom: 30px;">
+
+                @{
+                    String aaa = item.image;
+
+                }
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.articleName)</h5>
+                        <p class="card-text" style="height:60px;">
+                            <span style="color:green;">@Html.DisplayFor(modelItem => item.prix)</span>  <br />
+                            @Html.DisplayFor(modelItem => item.categorie.categorieName) <br />
+                        </p>
+                        <a href="@Html.DisplayFor(modelItem => item.image)" target="_blank"> <button class="btn btn-info">Voir Images</button> </a>
+                        <a class="btn btn-success" asp-action="Details" asp-route-id="@item.articleID">Details</a>
+                        <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.articleID">Ajouter au panier</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</body>
+
